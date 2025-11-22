@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento de Prioridades - Igreja Betel Brasileiro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0f2f5; }
+        
+        /* Card Styles */
+        .item-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .item-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #3b82f6;
+        }
+
+        /* Modal Styles */
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Spec List inside Modal */
+        .spec-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background-color: #f9fafb;
+            border-radius: 0.5rem;
+        }
+        .spec-list i {
+            color: #2563eb;
+            width: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Principal -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+            <div class="inline-block">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-2">
+                    Orçamento de prioridades
+                </h1>
+                <p class="text-lg md:text-xl text-gray-500 font-light">
+                    Igreja Betel Brasileiro em Equador-RN
+                </p>
+            </div>
+            <div class="mt-4 text-xs text-gray-400 uppercase tracking-widest">
+                Atualizado em <span id="current-date"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Filter Tabs -->
+        <div class="flex justify-center mb-10 flex-wrap gap-2">
+            <button onclick="filterSelection('all')" class="px-4 py-2 rounded-full text-sm font-medium bg-blue-600 text-white shadow-md hover:bg-blue-700 transition-colors focus:outline-none ring-2 ring-offset-2 ring-blue-500" id="btn-all">Todos</button>
+            <button onclick="filterSelection('audio')" class="px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600 hover:bg-gray-50 transition-colors focus:outline-none border border-gray-200" id="btn-audio">Áudio</button>
+            <button onclick="filterSelection('clima')" class="px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600 hover:bg-gray-50 transition-colors focus:outline-none border border-gray-200" id="btn-clima">Climatização</button>
+            <button onclick="filterSelection('informatica')" class="px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600 hover:bg-gray-50 transition-colors focus:outline-none border border-gray-200" id="btn-informatica">Informática</button>
+            <button onclick="filterSelection('video')" class="px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600 hover:bg-gray-50 transition-colors focus:outline-none border border-gray-200" id="btn-video">Vídeo</button>
+        </div>
+
+        <!-- Grid Clean Layout -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+            <!-- CARD 1: Mesa de Som -->
+            <div class="item-card filter-item audio bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center border border-gray-100 shadow-sm relative group overflow-hidden"
+                 onclick="openModal('modal-mesa')">
+                <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-sliders-h text-4xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">Mesa de Som Digital</h3>
+                <span class="text-sm text-gray-400 mt-2">Clique para ver o modelo</span>
+                <div class="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full animate-pulse" title="Alta Prioridade"></div>
+            </div>
+
+            <!-- CARD 2: Ar Condicionado 1 -->
+            <div class="item-card filter-item clima bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center border border-gray-100 shadow-sm relative group"
+                 onclick="openModal('modal-ac-lg')">
+                <div class="w-24 h-24 bg-cyan-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-snowflake text-4xl text-cyan-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-cyan-600 transition-colors">Ar-Condicionado (Opção 1)</h3>
+                <span class="text-sm text-gray-400 mt-2">Clique para ver detalhes</span>
+            </div>
+
+            <!-- CARD 3: Ar Condicionado 2 -->
+            <div class="item-card filter-item clima bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center border border-gray-100 shadow-sm relative group"
+                 onclick="openModal('modal-ac-agratto')">
+                <div class="w-24 h-24 bg-cyan-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-wind text-4xl text-cyan-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-cyan-600 transition-colors">Ar-Condicionado (Opção 2)</h3>
+                <span class="text-sm text-gray-400 mt-2">Clique para ver detalhes</span>
+            </div>
+
+            <!-- CARD 4: Notebook 1 -->
+            <div class="item-card filter-item informatica bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center border border-gray-100 shadow-sm relative group"
+                 onclick="openModal('modal-note-lenovo')">
+                <div class="w-24 h-24 bg-indigo-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-laptop text-4xl text-indigo-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-indigo-600 transition-colors">Notebook Intermediário</h3>
+                <span class="text-sm text-gray-400 mt-2">Clique para ver o modelo</span>
+            </div>
+
+            <!-- CARD 5: Notebook 2 -->
+            <div class="item-card filter-item informatica bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center border border-gray-100 shadow-sm relative group"
+                 onclick="openModal('modal-note-acer')">
+                <div class="w-24 h-24 bg-indigo-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-laptop-code text-4xl text-indigo-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-indigo-600 transition-colors">Notebook Básico</h3>
+                <span class="text-sm text-gray-400 mt-2">Clique para ver o modelo</span>
+            </div>
+
+            <!-- CARD 6: Projetor 1 -->
+            <div class="item-card filter-item video bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center border border-gray-100 shadow-sm relative group"
+                 onclick="openModal('modal-proj-epson')">
+                <div class="w-24 h-24 bg-purple-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-video text-4xl text-purple-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">Projetor 3LCD</h3>
+                <span class="text-sm text-gray-400 mt-2">Clique para ver o modelo</span>
+            </div>
+
+            <!-- CARD 7: Projetor 2 -->
+            <div class="item-card filter-item video bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center border border-gray-100 shadow-sm relative group"
+                 onclick="openModal('modal-proj-benq')">
+                <div class="w-24 h-24 bg-purple-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-film text-4xl text-purple-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">Projetor DLP (Alto Brilho)</h3>
+                <span class="text-sm text-gray-400 mt-2">Clique para ver o modelo</span>
+            </div>
+
+            <!-- CARD 8: Caixa de Som -->
+            <div class="item-card filter-item audio bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center border border-gray-100 shadow-sm relative group"
+                 onclick="openModal('modal-cx-dbr')">
+                <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-volume-up text-4xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">Caixa Acústica Ativa</h3>
+                <span class="text-sm text-gray-400 mt-2">Clique para ver o modelo</span>
+            </div>
+
+        </div>
+
+        <!-- Pendencias (Cards Pequenos) -->
+        <div class="mt-16 border-t border-gray-200 pt-10">
+            <h3 class="text-lg font-semibold text-gray-700 mb-6">Outras Pendências</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-gray-100 rounded-xl p-4 flex items-center gap-4 text-gray-600">
+                    <i class="fas fa-plug text-xl"></i>
+                    <span>Cabos de Áudio</span>
+                </div>
+                <div class="bg-gray-100 rounded-xl p-4 flex items-center gap-4 text-gray-600">
+                    <i class="fas fa-guitar text-xl"></i>
+                    <span>Instrumentos (Guitarra)</span>
+                </div>
+                <div class="bg-gray-100 rounded-xl p-4 flex items-center gap-4 text-gray-600">
+                    <i class="fas fa-layer-group text-xl"></i>
+                    <span>Acústica (Carpete)</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODALS (Hidden by default) -->
+
+    <!-- Modal: Mesa de Som -->
+    <div id="modal-mesa" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 backdrop-blur-sm">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+            <div class="bg-blue-600 p-6 text-white relative">
+                <button onclick="closeModal('modal-mesa')" class="absolute top-4 right-4 text-white hover:text-gray-200"><i class="fas fa-times text-xl"></i></button>
+                <h3 class="text-2xl font-bold">Soundcraft Ui16</h3>
+                <p class="opacity-90">Mesa de Som Digital</p>
+            </div>
+            <div class="p-6">
+                <ul class="spec-list mb-6">
+                    <li><i class="fas fa-wifi"></i> Controle via Wi-Fi / Ethernet</li>
+                    <li><i class="fas fa-sliders-h"></i> 16 Canais (Sem faders físicos)</li>
+                    <li><i class="fas fa-microphone-alt"></i> Pré-amplificadores Studer</li>
+                    <li><i class="fas fa-history"></i> Histórico: R$ 2.550 a 3.500</li>
+                </ul>
+                <div class="flex justify-between items-center border-t pt-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Valor à vista</p>
+                        <p class="text-3xl font-bold text-gray-800">R$ 2.868,00</p>
+                    </div>
+                    <a href="https://mercadolivre.com/sec/2yvET27" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition-colors">
+                        Comprar Agora <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: AC LG -->
+    <div id="modal-ac-lg" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 backdrop-blur-sm">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+            <div class="bg-cyan-600 p-6 text-white relative">
+                <button onclick="closeModal('modal-ac-lg')" class="absolute top-4 right-4 text-white hover:text-gray-200"><i class="fas fa-times text-xl"></i></button>
+                <h3 class="text-2xl font-bold">LG Dual Inverter Voice</h3>
+                <p class="opacity-90">Ar-Condicionado Split HW</p>
+            </div>
+            <div class="p-6">
+                <ul class="spec-list mb-6">
+                    <li><i class="fas fa-wind"></i> 12.000 BTUs / Só Frio / 220V</li>
+                    <li><i class="fas fa-volume-mute"></i> Tecnologia Ultra Silenciosa</li>
+                    <li><i class="fas fa-bolt"></i> Economia de Energia R-32</li>
+                    <li><i class="fas fa-tag"></i> Use o cupom: MAGALU150</li>
+                </ul>
+                <div class="flex justify-between items-center border-t pt-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Valor c/ Cupom</p>
+                        <p class="text-3xl font-bold text-gray-800">R$ 1.941,20</p>
+                    </div>
+                    <a href="https://divulgador.magalu.com/0-9tIjWL" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition-colors">
+                        Ver no Magalu <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: AC Agratto -->
+    <div id="modal-ac-agratto" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 backdrop-blur-sm">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+            <div class="bg-cyan-600 p-6 text-white relative">
+                <button onclick="closeModal('modal-ac-agratto')" class="absolute top-4 right-4 text-white hover:text-gray-200"><i class="fas fa-times text-xl"></i></button>
+                <h3 class="text-2xl font-bold">Agratto Liv Inverter</h3>
+                <p class="opacity-90">Ar-Condicionado Split</p>
+            </div>
+            <div class="p-6">
+                <ul class="spec-list mb-6">
+                    <li><i class="fas fa-wind"></i> 12.000 BTUs / Frio / 220V</li>
+                    <li><i class="fas fa-barcode"></i> Modelo: LCST12F-02I</li>
+                    <li><i class="fas fa-piggy-bank"></i> Ótimo Custo-Benefício</li>
+                </ul>
+                <div class="flex justify-between items-center border-t pt-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Valor à vista</p>
+                        <p class="text-3xl font-bold text-gray-800">R$ 1.789,00</p>
+                    </div>
+                    <a href="https://s.shopee.com.br/1LY8I6MS14?share_channel_code=1" target="_blank" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold shadow transition-colors">
+                        Ver na Shopee <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Note Lenovo -->
+    <div id="modal-note-lenovo" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 backdrop-blur-sm">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+            <div class="bg-indigo-600 p-6 text-white relative">
+                <button onclick="closeModal('modal-note-lenovo')" class="absolute top-4 right-4 text-white hover:text-gray-200"><i class="fas fa-times text-xl"></i></button>
+                <h3 class="text-2xl font-bold">Lenovo Ideapad Slim 3</h3>
+                <p class="opacity-90">Notebook (Cor: Luna Grey)</p>
+            </div>
+            <div class="p-6">
+                <ul class="spec-list mb-6">
+                    <li><i class="fas fa-microchip"></i> Intel Core i5-13420H</li>
+                    <li><i class="fas fa-memory"></i> 8GB RAM / 512GB SSD</li>
+                    <li><i class="fab fa-linux"></i> Sistema Linux (Rápido para multimídia)</li>
+                </ul>
+                <div class="flex justify-between items-center border-t pt-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Valor à vista</p>
+                        <p class="text-3xl font-bold text-gray-800">R$ 2.499,00</p>
+                    </div>
+                    <a href="https://mercadolivre.com/sec/2f7xUSa" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition-colors">
+                        Ver Oferta <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Note Acer -->
+    <div id="modal-note-acer" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 backdrop-blur-sm">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+            <div class="bg-indigo-600 p-6 text-white relative">
+                <button onclick="closeModal('modal-note-acer')" class="absolute top-4 right-4 text-white hover:text-gray-200"><i class="fas fa-times text-xl"></i></button>
+                <h3 class="text-2xl font-bold">Acer Aspire 15</h3>
+                <p class="opacity-90">Notebook (Modelo AG15-51P)</p>
+            </div>
+            <div class="p-6">
+                <ul class="spec-list mb-6">
+                    <li><i class="fas fa-microchip"></i> Intel Core i3 (Eficiente)</li>
+                    <li><i class="fas fa-memory"></i> 8GB RAM / 256GB SSD</li>
+                    <li><i class="fab fa-windows"></i> Windows 11 Original / Tela LED IPS</li>
+                </ul>
+                <div class="flex justify-between items-center border-t pt-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Valor à vista</p>
+                        <p class="text-3xl font-bold text-gray-800">R$ 2.249,10</p>
+                    </div>
+                    <a href="https://mercadolivre.com/sec/14Huibv" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition-colors">
+                        Ver Oferta <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Proj Epson -->
+    <div id="modal-proj-epson" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 backdrop-blur-sm">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+            <div class="bg-purple-600 p-6 text-white relative">
+                <button onclick="closeModal('modal-proj-epson')" class="absolute top-4 right-4 text-white hover:text-gray-200"><i class="fas fa-times text-xl"></i></button>
+                <h3 class="text-2xl font-bold">Epson Powerlite E20</h3>
+                <p class="opacity-90">Projetor Multimídia</p>
+            </div>
+            <div class="p-6">
+                <ul class="spec-list mb-6">
+                    <li><i class="fas fa-lightbulb"></i> 3400 Lumens</li>
+                    <li><i class="fas fa-tv"></i> Tecnologia 3LCD (Cores Vivas)</li>
+                    <li><i class="fas fa-expand"></i> Resolução XGA / HDMI / USB</li>
+                </ul>
+                <div class="flex justify-between items-center border-t pt-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Valor à vista</p>
+                        <p class="text-3xl font-bold text-gray-800">R$ 3.361,44</p>
+                    </div>
+                    <a href="https://mercadolivre.com/sec/1jAWob8" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition-colors">
+                        Ver Oferta <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Proj Benq -->
+    <div id="modal-proj-benq" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 backdrop-blur-sm">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+            <div class="bg-purple-600 p-6 text-white relative">
+                <button onclick="closeModal('modal-proj-benq')" class="absolute top-4 right-4 text-white hover:text-gray-200"><i class="fas fa-times text-xl"></i></button>
+                <h3 class="text-2xl font-bold">BenQ MW560 DLP</h3>
+                <p class="opacity-90">Projetor (Alto Brilho)</p>
+            </div>
+            <div class="p-6">
+                <ul class="spec-list mb-6">
+                    <li><i class="fas fa-lightbulb"></i> 4.000 Lumens</li>
+                    <li><i class="fas fa-tv"></i> Tecnologia DLP / Alto Contraste</li>
+                    <li><i class="fas fa-expand"></i> Resolução WXGA (1280x800)</li>
+                </ul>
+                <div class="flex justify-between items-center border-t pt-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Valor à vista</p>
+                        <p class="text-3xl font-bold text-gray-800">R$ 3.367,00</p>
+                    </div>
+                    <a href="https://mercadolivre.com/sec/2TVdSCo" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition-colors">
+                        Ver Oferta <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Caixa DBR -->
+    <div id="modal-cx-dbr" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 backdrop-blur-sm">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+            <div class="bg-blue-600 p-6 text-white relative">
+                <button onclick="closeModal('modal-cx-dbr')" class="absolute top-4 right-4 text-white hover:text-gray-200"><i class="fas fa-times text-xl"></i></button>
+                <h3 class="text-2xl font-bold">DBR Ativa DXT15</h3>
+                <p class="opacity-90">Caixa Acústica Profissional</p>
+            </div>
+            <div class="p-6">
+                <ul class="spec-list mb-6">
+                    <li><i class="fas fa-bullhorn"></i> 700W RMS de Potência</li>
+                    <li><i class="fas fa-dot-circle"></i> Woofer de 15 polegadas</li>
+                    <li><i class="fas fa-box"></i> Gabinete Robusto / Preto</li>
+                </ul>
+                <div class="flex justify-between items-center border-t pt-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Valor à vista</p>
+                        <p class="text-3xl font-bold text-gray-800">R$ 3.856,05</p>
+                    </div>
+                    <a href="https://mercadolivre.com/sec/1hAmpR6" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition-colors">
+                        Ver Oferta <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="mt-20 pb-8 text-center border-t border-gray-200 pt-8">
+        <p class="text-gray-400 text-sm">© 2024 Igreja Betel Brasileiro</p>
+    </footer>
+
+    <script>
+        // Date Display
+        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR', dateOptions);
+
+        // Filtering Function
+        function filterSelection(category) {
+            var items = document.getElementsByClassName("filter-item");
+            var btns = [
+                document.getElementById('btn-all'),
+                document.getElementById('btn-audio'),
+                document.getElementById('btn-clima'),
+                document.getElementById('btn-informatica'),
+                document.getElementById('btn-video')
+            ];
+
+            if (category == "all") category = "";
+            
+            // Show/Hide Items
+            for (var i = 0; i < items.length; i++) {
+                items[i].classList.remove("hidden");
+                if (items[i].className.indexOf(category) == -1) {
+                    items[i].classList.add("hidden");
+                }
+            }
+
+            // Update Buttons Styles
+            btns.forEach(btn => {
+                // Reset to default white style
+                btn.className = "px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600 hover:bg-gray-50 transition-colors focus:outline-none border border-gray-200";
+            });
+            
+            // Set active style
+            var activeId = 'btn-' + (category === "" ? 'all' : category);
+            var activeBtn = document.getElementById(activeId);
+            if(activeBtn) {
+                activeBtn.className = "px-4 py-2 rounded-full text-sm font-medium bg-blue-600 text-white shadow-md hover:bg-blue-700 transition-colors focus:outline-none ring-2 ring-offset-2 ring-blue-500";
+            }
+        }
+
+        // Modal Logic
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+        }
+
+        // Close modal on click outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
