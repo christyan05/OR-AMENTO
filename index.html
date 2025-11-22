@@ -198,7 +198,45 @@
                 </div>
             </div>
 
-            <!-- Item 2: Ar LG -->
+            <!-- Item 2: Guitarra -->
+            <div class="filter-item audio glass-card rounded-3xl p-8 cursor-pointer group" onclick="openModal('modal-guitarra')">
+                <div class="flex flex-col h-full items-center text-center">
+                    <div class="icon-wrapper grad-blue mb-6">
+                        <i class="fa-solid fa-guitar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">Guitarra</h3>
+                    <p class="text-sm text-slate-400 font-medium">Tagima T-635</p>
+                    
+                    <div class="mt-auto pt-6 w-full">
+                        <div class="py-2 px-4 bg-slate-50 rounded-xl text-xs font-semibold text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
+                            Ver detalhes <i class="fas fa-arrow-right ml-1 opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3: Carpete -->
+            <div class="filter-item audio glass-card rounded-3xl p-8 cursor-pointer group" onclick="openModal('modal-carpete')">
+                <div class="flex flex-col h-full items-center text-center">
+                    <div class="icon-wrapper grad-blue mb-6">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">Carpete</h3>
+                    <p class="text-sm text-slate-400 font-medium">Acústica Altar</p>
+                    
+                    <div class="mt-2 inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-bold rounded-full border border-orange-200">
+                        <i class="fa-solid fa-ruler-combined mr-1"></i> Precisa Medir
+                    </div>
+
+                    <div class="mt-auto pt-6 w-full">
+                        <div class="py-2 px-4 bg-slate-50 rounded-xl text-xs font-semibold text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
+                            Ver detalhes <i class="fas fa-arrow-right ml-1 opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4: Ar LG -->
             <div class="filter-item clima glass-card rounded-3xl p-8 cursor-pointer group" onclick="openModal('modal-ac-lg')">
                 <div class="flex flex-col h-full items-center text-center">
                     <div class="icon-wrapper grad-cyan mb-6">
@@ -215,7 +253,7 @@
                 </div>
             </div>
 
-            <!-- Item 5: Notebook Acer (Renumbered in logic, kept ID) -->
+            <!-- Item 5: Notebook Acer -->
             <div class="filter-item informatica glass-card rounded-3xl p-8 cursor-pointer group" onclick="openModal('modal-note-acer')">
                 <div class="flex flex-col h-full items-center text-center">
                     <div class="icon-wrapper grad-indigo mb-6">
@@ -232,7 +270,7 @@
                 </div>
             </div>
 
-            <!-- Item 7: Projetor Benq -->
+            <!-- Item 6: Projetor Benq -->
             <div class="filter-item video glass-card rounded-3xl p-8 cursor-pointer group" onclick="openModal('modal-proj-benq')">
                 <div class="flex flex-col h-full items-center text-center">
                     <div class="icon-wrapper grad-purple mb-6">
@@ -249,7 +287,7 @@
                 </div>
             </div>
 
-            <!-- Item 8: Caixa Som -->
+            <!-- Item 7: Caixa Som -->
             <div class="filter-item audio glass-card rounded-3xl p-8 cursor-pointer group" onclick="openModal('modal-cx-dbr')">
                 <div class="flex flex-col h-full items-center text-center">
                     <div class="icon-wrapper grad-blue mb-6">
@@ -258,6 +296,27 @@
                     <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">Caixa Ativa</h3>
                     <p class="text-sm text-slate-400 font-medium">DBR DXT15</p>
                     
+                    <div class="mt-auto pt-6 w-full">
+                        <div class="py-2 px-4 bg-slate-50 rounded-xl text-xs font-semibold text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
+                            Ver detalhes <i class="fas fa-arrow-right ml-1 opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 8: Cabos -->
+            <div class="filter-item audio glass-card rounded-3xl p-8 cursor-pointer group" onclick="openModal('modal-cabos')">
+                <div class="flex flex-col h-full items-center text-center">
+                    <div class="icon-wrapper grad-blue mb-6">
+                        <i class="fa-solid fa-plug"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">Cabos</h3>
+                    <p class="text-sm text-slate-400 font-medium">Microfone Balanceado</p>
+                    
+                    <div class="mt-2 inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-bold rounded-full border border-orange-200">
+                        <i class="fa-solid fa-clipboard-list mr-1"></i> Levantar Plugs
+                    </div>
+
                     <div class="mt-auto pt-6 w-full">
                         <div class="py-2 px-4 bg-slate-50 rounded-xl text-xs font-semibold text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
                             Ver detalhes <i class="fas fa-arrow-right ml-1 opacity-50"></i>
@@ -276,7 +335,7 @@
                     <thead>
                         <tr>
                             <th>Item</th>
-                            <th class="text-right">Valor Unitário (À Vista)</th>
+                            <th class="text-right">Valor Unitário</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -301,35 +360,38 @@
                             <td class="text-right">R$ 3.856,05</td>
                         </tr>
                         <tr>
-                            <td>TOTAL GERAL</td>
-                            <td class="text-right text-blue-600">R$ 14.281,35</td>
+                            <td>Guitarra Tagima T-635 Classic</td>
+                            <td class="text-right">R$ 1.709,00</td>
+                        </tr>
+                        <tr class="bg-orange-50/50">
+                            <td class="flex items-center gap-2">
+                                Cabo Microfone Santo Angelo (50m)
+                                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-2 py-0.5 rounded border border-orange-200">PENDENTE: PLUGS</span>
+                            </td>
+                            <td class="text-right">R$ 218,00</td>
+                        </tr>
+                        <tr class="bg-orange-50/50">
+                            <td class="flex items-center gap-2">
+                                Carpete Ecoloop (Kit 20m²)
+                                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-2 py-0.5 rounded border border-orange-200">PENDENTE: MEDIÇÃO</span>
+                            </td>
+                            <td class="text-right text-sm text-slate-500">R$ 16,75 / m² (Sob Medida)</td>
+                        </tr>
+                        <tr>
+                            <td>TOTAL GERAL (Itens Fixos)</td>
+                            <td class="text-right text-blue-600 font-bold text-xl">R$ 16.208,35</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-
-        <!-- Section: Outras Pendências -->
-        <div class="mt-16 pt-10 border-t border-slate-200">
-            <h4 class="text-sm uppercase tracking-widest text-slate-400 font-bold mb-6 text-center sm:text-left">Ainda em cotação</h4>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="bg-white rounded-2xl p-5 flex items-center gap-4 shadow-sm border border-slate-100 opacity-70 hover:opacity-100 transition-opacity">
-                    <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-500"><i class="fa-solid fa-plug"></i></div>
-                    <span class="font-medium text-slate-600">Cabos de Áudio</span>
-                </div>
-                <div class="bg-white rounded-2xl p-5 flex items-center gap-4 shadow-sm border border-slate-100 opacity-70 hover:opacity-100 transition-opacity">
-                    <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-500"><i class="fa-solid fa-guitar"></i></div>
-                    <span class="font-medium text-slate-600">Guitarra Elétrica</span>
-                </div>
-                <div class="bg-white rounded-2xl p-5 flex items-center gap-4 shadow-sm border border-slate-100 opacity-70 hover:opacity-100 transition-opacity">
-                    <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-500"><i class="fa-solid fa-layer-group"></i></div>
-                    <span class="font-medium text-slate-600">Carpete Bateria</span>
-                </div>
+                <p class="text-center text-xs text-slate-400 mt-3 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                    <i class="fa-solid fa-circle-info mr-1"></i> 
+                    <strong>Atenção:</strong> O valor total não inclui o custo final do carpete (necessário medição exata no altar) e a quantidade de plugs necessários para os cabos.
+                </p>
             </div>
         </div>
     </main>
 
-    <!-- Modals (Estilo Clean) -->
+    <!-- Modals -->
     
     <!-- Modal Mesa -->
     <div id="modal-mesa" class="modal fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-slate-900/60 backdrop-blur-sm p-0 sm:p-4">
@@ -366,6 +428,140 @@
                         <p class="text-3xl font-bold text-slate-900">R$ 2.868</p>
                     </div>
                     <a href="https://mercadolivre.com/sec/2yvET27" target="_blank" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-slate-900/20 hover:bg-blue-600 hover:shadow-blue-600/30 transition-all flex items-center gap-2">
+                        Comprar <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Guitarra -->
+    <div id="modal-guitarra" class="modal fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-slate-900/60 backdrop-blur-sm p-0 sm:p-4">
+        <div class="modal-content bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="relative h-32 bg-blue-900 flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-400 to-blue-900"></div>
+                <i class="fa-solid fa-guitar text-6xl text-white/90 relative z-10"></i>
+                <button onclick="closeModal('modal-guitarra')" class="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors z-20">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-8 overflow-y-auto">
+                <span class="text-blue-600 font-bold text-xs tracking-wider uppercase">Instrumentos</span>
+                <h2 class="text-2xl font-bold text-slate-900 mt-1 mb-4">Tagima T-635 Classic</h2>
+                
+                <div class="space-y-3 mb-8">
+                    <div class="flex items-center gap-3 text-slate-600 text-sm p-3 bg-slate-50 rounded-xl">
+                        <i class="fa-solid fa-palette text-blue-500 w-6 text-center"></i> Cor: Olympic White / Branco
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-600 text-sm p-3 bg-slate-50 rounded-xl">
+                        <i class="fa-solid fa-music text-blue-500 w-6 text-center"></i> Modelo Clássico
+                    </div>
+                </div>
+
+                <div class="flex items-end justify-between pt-6 border-t border-slate-100">
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium uppercase">Preço à vista</p>
+                        <p class="text-3xl font-bold text-slate-900">R$ 1.709</p>
+                    </div>
+                    <a href="https://mercadolivre.com/sec/18e8aPH" target="_blank" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-slate-900/20 hover:bg-blue-600 hover:shadow-blue-600/30 transition-all flex items-center gap-2">
+                        Comprar <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Carpete -->
+    <div id="modal-carpete" class="modal fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-slate-900/60 backdrop-blur-sm p-0 sm:p-4">
+        <div class="modal-content bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="relative h-32 bg-blue-900 flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-400 to-blue-900"></div>
+                <i class="fa-solid fa-layer-group text-6xl text-white/90 relative z-10"></i>
+                <button onclick="closeModal('modal-carpete')" class="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors z-20">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-8 overflow-y-auto">
+                <span class="text-blue-600 font-bold text-xs tracking-wider uppercase">Acústica</span>
+                <h2 class="text-2xl font-bold text-slate-900 mt-1 mb-4">Forração Ecoloop</h2>
+                
+                <!-- Alerta de Medição -->
+                <div class="bg-orange-50 border-l-4 border-orange-500 p-4 mb-6 rounded-r">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-ruler-combined text-orange-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-orange-700 font-bold">Atenção: Necessário Medição</p>
+                            <p class="text-xs text-orange-600 mt-1">É imprescindível medir a área exata do altar antes de fechar a compra para evitar falta ou sobra excessiva de material.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <div class="flex items-center gap-3 text-slate-600 text-sm p-3 bg-slate-50 rounded-xl">
+                        <i class="fa-solid fa-ruler-combined text-blue-500 w-6 text-center"></i> Kit base 20m² (Referência)
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-600 text-sm p-3 bg-slate-50 rounded-xl">
+                        <i class="fa-solid fa-volume-xmark text-blue-500 w-6 text-center"></i> Melhora acústica da bateria
+                    </div>
+                </div>
+
+                <div class="flex items-end justify-between pt-6 border-t border-slate-100">
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium uppercase">Preço por m²</p>
+                        <p class="text-3xl font-bold text-slate-900">R$ 16,75</p>
+                    </div>
+                    <a href="https://mercadolivre.com/sec/1ohthz4" target="_blank" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-slate-900/20 hover:bg-blue-600 hover:shadow-blue-600/30 transition-all flex items-center gap-2">
+                        Ver no ML <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cabos -->
+    <div id="modal-cabos" class="modal fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-slate-900/60 backdrop-blur-sm p-0 sm:p-4">
+        <div class="modal-content bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="relative h-32 bg-blue-900 flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-400 to-blue-900"></div>
+                <i class="fa-solid fa-plug text-6xl text-white/90 relative z-10"></i>
+                <button onclick="closeModal('modal-cabos')" class="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors z-20">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-8 overflow-y-auto">
+                <span class="text-blue-600 font-bold text-xs tracking-wider uppercase">Conectividade</span>
+                <h2 class="text-2xl font-bold text-slate-900 mt-1 mb-4">Cabo Santo Angelo X30</h2>
+                
+                <!-- Alerta de Levantamento -->
+                <div class="bg-orange-50 border-l-4 border-orange-500 p-4 mb-6 rounded-r">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-clipboard-list text-orange-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-orange-700 font-bold">Pendente: Quantidade de Plugs</p>
+                            <p class="text-xs text-orange-600 mt-1">Falta realizar o levantamento da quantidade e tipos de plugs (XLR/P10) necessários para a confecção dos cabos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <div class="flex items-center gap-3 text-slate-600 text-sm p-3 bg-slate-50 rounded-xl">
+                        <i class="fa-solid fa-ruler text-blue-500 w-6 text-center"></i> Rolo de 50 metros
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-600 text-sm p-3 bg-slate-50 rounded-xl">
+                        <i class="fa-solid fa-shield-halved text-blue-500 w-6 text-center"></i> Blindado / Balanceado 2x0,30mm²
+                    </div>
+                </div>
+
+                <div class="flex items-end justify-between pt-6 border-t border-slate-100">
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium uppercase">Preço à vista</p>
+                        <p class="text-3xl font-bold text-slate-900">R$ 218,00</p>
+                    </div>
+                    <a href="https://mercadolivre.com/sec/2wzQpmd" target="_blank" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-slate-900/20 hover:bg-blue-600 hover:shadow-blue-600/30 transition-all flex items-center gap-2">
                         Comprar <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                     </a>
                 </div>
